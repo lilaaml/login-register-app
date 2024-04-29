@@ -7,19 +7,25 @@
     <title>Login Register App</title>
 </head>
 <body>
-    <div class="login">
+    <div class="login disable">
         <p>Email</p>
         <p>Password</p>
         <button>Log In</button>
     </div>
 
-    <div class="sign-up disable">
+    <div class="sign-up">
         <p>First Name</p>
+        <input type="text" id="first-name-input">
         <p>Last Name</p>
+        <input type="text" id="last-name-input">
         <p>Email</p>
+        <input type="text" id="email-input">
         <p>Password</p>
-        <button>Sign Up</button>
+        <input type="text" id="password-input">
+        <button onclick="signUp()">Sign Up</button>
     </div>
+
+    <ul id="user-list"></ul>
 
     <script src="script.js"></script>
 </body>
