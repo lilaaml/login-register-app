@@ -6,6 +6,7 @@ const userDisplay = document.getElementById("user-display");
 
 // Create an array
 let users = [];
+let tempArr = [];
 
 // console.log(users);
 
@@ -25,51 +26,80 @@ class User {
 
 // Create a new object and push it into the array
 function signUp() {
-    let firstName = document.getElementById("first-name-input").value;
-    let lastName = document.getElementById("last-name-input").value;
-    let email = document.getElementById("email-input").value;
-    let password = document.getElementById("password-input").value;
+    let firstName = document.getElementById("first-name-input");
+    let lastName = document.getElementById("last-name-input");
+    let email = document.getElementById("email-input");
+    let password = document.getElementById("password-input");
 
-    let user = new User(firstName, lastName, email, password);
-    users.push(user);
+    let user = new User(firstName.value, lastName.value, email.value, password.value);
+    tempArr.push(user);
+    saveData();
+    console.log(tempArr);
 
-    // Clear input box
-    firstName = "";
-    lastName = "";
-    email = "";
-    password = "";
-
-    // Save data
-    localStorage.setItem("users", JSON.stringify(users));
+    // Clear fields
+    firstName.value = "";
+    lastName.value = "";
+    email.value = "";
+    password.value = "";
 
     // Destroy "User" object (make the user variable empty again)
-    // user = "";
+    tempArr = "";
     
     // Get data
-    users = JSON.parse(localStorage.getItem("users"));
+    // users = JSON.parse(localStorage.getItem("users"));
     
     // Display the data
-    let userDisplay = document.getElementById("user-display");
-    let userList = document.createElement("li");
+    // let userDisplay = document.getElementById("user-display");
+    // let userList = document.createElement("li");
     // let userList = document.createElement("li");
 
     // users.forEach(user => {
         // userDisplay.innerHTML += user.firstName + user.lastName + user.email + user.password;
         // userDisplay.append(userList);
     // });
-    for (let i = 0; i < users.length; i++) {
-        // userDisplay.innerHTML = array[i];
-        userList.innerHTML = `${users[i].firstName}, ${users[i].lastName}, ${users[i].email}, ${users[i].password}`;
-        userDisplay.append(userList);
+
+    // for (let i = 0; i < users.length; i++) {
+    //     // userDisplay.innerHTML = array[i];
+    //     userList.innerHTML = `${users[i].firstName}, ${users[i].lastName}, ${users[i].email}, ${users[i].password}`;
+    //     userDisplay.append(userList);
         
-    }
+    // }
     // userDisplay.innerHTML = `${users[0].firstName}, ${users[0].lastName}, ${users[0].email}, ${users[0].password}`; 
     // userDisplay.innerHTML = users; 
 
     // userDisplay.append(userList.innerHTML);
 
-    console.log(users);
+    // console.log(users);
 }
+
+function saveData() {
+    localStorage.setItem("users", JSON.stringify(tempArr));
+}
+
+function showData() {
+    let userDisplay = document.getElementById("user-display");
+    let userList = document.createElement("li");
+
+    tempArr = JSON.parse(localStorage.getItem("users"));
+
+    if(tempArr.length == 0) {
+        userList = "";
+    } else {
+        for (let i = 0; i < tempArr.length; i++) {
+            // userDisplay.innerHTML = array[i];
+            userDisplay.innerHTML += `<li>${tempArr[i].firstName}, ${tempArr[i].lastName}, ${tempArr[i].email}, ${tempArr[i].password}</li>`;
+            // userDisplay.append(userList);
+        }
+    }
+
+    console.log(tempArr);
+}
+
+function deleteData() {
+    localStorage.removeItem("users");
+}
+
+showData();
 
 // Push the new object into the array
 
