@@ -7,7 +7,7 @@ const userDisplay = document.getElementById("user-display");
 // Create an array
 let users = [];
 
-console.log(users);
+// console.log(users);
 
 // Create a constructor
 class User {
@@ -43,15 +43,32 @@ function signUp() {
     localStorage.setItem("users", JSON.stringify(users));
 
     // Destroy "User" object (make the user variable empty again)
-    user = "";
+    // user = "";
     
-    // Get the data
-    let userTemp = JSON.parse(localStorage.getItem("users"));
+    // Get data
+    users = JSON.parse(localStorage.getItem("users"));
     
     // Display the data
+    let userDisplay = document.getElementById("user-display");
     let userList = document.createElement("li");
+    // let userList = document.createElement("li");
 
-    // userList.innerHTML = `<li>${newUser.firstName}, ${newUser.lastName}, ${newUser.email}, ${newUser.password}</li>`; 
+    // users.forEach(user => {
+        // userDisplay.innerHTML += user.firstName + user.lastName + user.email + user.password;
+        // userDisplay.append(userList);
+    // });
+    for (let i = 0; i < users.length; i++) {
+        // userDisplay.innerHTML = array[i];
+        userList.innerHTML = `${users[i].firstName}, ${users[i].lastName}, ${users[i].email}, ${users[i].password}`;
+        userDisplay.append(userList);
+        
+    }
+    // userDisplay.innerHTML = `${users[0].firstName}, ${users[0].lastName}, ${users[0].email}, ${users[0].password}`; 
+    // userDisplay.innerHTML = users; 
+
+    // userDisplay.append(userList.innerHTML);
+
+    console.log(users);
 }
 
 // Push the new object into the array
